@@ -1,14 +1,14 @@
 import { Room, Activity, EnvironmentSection } from './types';
 
 export const BOOKING_URL = "https://www.booking.com/hotel/es/rural-la-casona-de-tamaya-tamajon.html?aid=1365032&label=hotel-rural-la-casona-de-tamaya-8940598&chal_t=1769424374398&force_referer=https%3A%2F%2Fhotelmania.net%2F#availability_target";
-export const PHOTOS_URL = "https://photos.app.goo.gl/aDZb5LJTcp0UxtsXJ"; 
+export const PHOTOS_URL = "https://photos.app.goo.gl/aDZb5LJTcp0UxtsXJ";
 
 // Imagen principal actualizada: Estilo atardecer en porche de piedra (similar a caption.jpg)
-export const HERO_IMAGE = "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=2070&auto=format&fit=crop"; 
+export const HERO_IMAGE = "/images/hero.jpg";
 
 export const HOTEL_CONDITIONS = {
-  checkIn: "14:00 - 19:00",
-  checkOut: "07:30 - 10:30",
+  checkIn: "12:00 - 14:00",
+  checkOut: "12:00 - 13:30",
   minAge: 18,
   pets: "No se admiten",
   smoking: "Prohibido fumar en todo el establecimiento",
@@ -33,7 +33,7 @@ export const ROOMS: Room[] = [
     description: 'Encanto tradicional con cabecero de madera maciza y vigas vistas. Decoración cálida en tonos ocres y rojizos con suelos de terracota.',
     price: 85,
     capacity: 2,
-    image: 'https://images.unsplash.com/photo-1560185009-dddeb820c7b7?q=80&w=1000&auto=format&fit=crop', 
+    image: 'https://images.unsplash.com/photo-1560185009-dddeb820c7b7?q=80&w=1000&auto=format&fit=crop',
     features: ['20 m²', 'Cama de Matrimonio', 'Vigas de Madera', 'Baño Privado', 'Vistas al Jardín']
   },
   {
