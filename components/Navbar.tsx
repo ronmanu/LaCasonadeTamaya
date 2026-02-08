@@ -33,7 +33,6 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, currentPage }) => {
             className="flex-shrink-0 cursor-pointer flex items-center gap-2"
             onClick={() => handleNav(PageState.HOME)}
           >
-            <img src="/images/logo.png" alt="Logo" className="h-12 w-auto object-contain" />
             <span className="font-serif text-2xl font-bold text-stone-800 tracking-tight">La Casona de Tamaya</span>
           </div>
 
