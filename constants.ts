@@ -124,7 +124,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'micologia',
     title: 'Paraíso Micológico',
     subtitle: 'Temporada 2025-2026',
-    image: 'https://images.unsplash.com/photo-1604502759828-5777df506822?q=80&w=1200&auto=format&fit=crop', // Mushrooms
+    image: '/images/setas_entorno.jpg', // Foto local de setas para la sección micológica
     content: [
       "Cuando las lluvias de otoño bañan la Sierra Norte, Tamajón se transforma. Nuestro suelo es uno de los más ricos de Castilla-La Mancha para la micología. Somos puerta de entrada a parques micológicos regulados donde el buscador respetuoso puede encontrar auténticos tesoros.",
       "Níscalos (Lactarius deliciosus) bajo los pinares y el preciado Boletus edulis en los robledales son los protagonistas de nuestras cestas. Para la temporada 2025-2026, recordamos la importancia de obtener el permiso diario (disponible online o en el pueblo) y de usar siempre cesta de mimbre para permitir que las esporas sigan sembrando el futuro de nuestros bosques."
