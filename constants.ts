@@ -263,7 +263,7 @@ export const GALLERY_IMAGES = [
 
   // Invierno (Basado en fotos de nieve)
   { src: "https://images.unsplash.com/photo-1483323326164-9b8449c25dbf?q=80&w=1200", category: "Invierno", caption: "La Casona bajo la nieve" },
-  { src: "https://images.unsplash.com/photo-1518182170546-0766be6f5a56?q=80&w=1200", category: "Invierno", caption: "Tamajón en invierno" },
+  { src: "/images/tamajon_invierno.jpg", category: "Invierno", caption: "Tamajón en invierno" },
 
   // Entorno (Vistas y Paisaje)
   { src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200", category: "Entorno", caption: "Vistas al Pico Ocejón" },
