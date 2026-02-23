@@ -257,7 +257,7 @@ function App() {
                       <img
                         src={section.image}
                         alt={section.title}
-                        className="relative rounded-lg shadow-xl w-full h-[400px] object-cover border border-stone-200 z-10"
+                        className="relative rounded-lg shadow-xl w-full h-[400px] object-cover object-top border border-stone-200 z-10"
                       />
                     </div>
 

@@ -110,7 +110,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'arquitectura-negra',
     title: 'La Ruta de la Arquitectura Negra',
     subtitle: 'El alma de pizarra de Guadalajara',
-    image: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1200&auto=format&fit=crop', // Slate village vibe
+    image: '/images/pueblos_negros.jpg', // Imagen local de Campillejo
     content: [
       "Desde La Casona de Tamaya se abren las puertas a uno de los tesoros etnográficos más singulares de Europa. La Arquitectura Negra debe su nombre al uso masivo de la pizarra en muros y cubiertas, mimetizando las aldeas con el paisaje oscuro y abrupto de la sierra.",
       "La ruta serpentea hacia el norte. Campillo de Ranas, con su atmósfera casi mística; Majaelrayo, a los pies del pico Ocejón; y Valverde de los Arroyos, uno de los pueblos más bonitos de España, donde la pizarra se combina con cuarcita dorada. En 2026, estos pueblos mantienen intacta su esencia, ofreciendo un silencio y una estética que parecen detener el tiempo."
