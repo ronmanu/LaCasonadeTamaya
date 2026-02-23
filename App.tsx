@@ -239,12 +239,16 @@ function App() {
       case PageState.ACTIVITIES:
         return (
           <div className="pt-20 bg-stone-50 min-h-screen">
-            <div className="bg-stone-800 text-white py-16 px-4 text-center">
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">El Entorno</h1>
-              <div className="w-24 h-1 bg-wood-600 mx-auto rounded-full mb-6"></div>
-              <p className="mt-2 text-stone-400 text-lg max-w-2xl mx-auto">
-                Tamajón: Puerta de la Arquitectura Negra. Descubre un paisaje donde la historia y la naturaleza se funden.
-              </p>
+            <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
+              <img src="/images/pueblos_negros.jpg" className="absolute inset-0 w-full h-full object-cover object-top" alt="El Entorno" />
+              <div className="absolute inset-0 bg-black/50"></div>
+              <div className="relative z-10 text-white text-center px-4">
+                <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">El Entorno</h1>
+                <div className="w-24 h-1 bg-wood-600 mx-auto rounded-full mb-6"></div>
+                <p className="mt-2 text-stone-200 text-lg max-w-2xl mx-auto font-light">
+                  Tamajón: Puerta de la Arquitectura Negra. Descubre un paisaje donde la historia y la naturaleza se funden.
+                </p>
+              </div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 pb-24">
