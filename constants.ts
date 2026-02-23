@@ -1,4 +1,4 @@
-import { Room, Activity, EnvironmentSection } from './types';
+import { Room, Activity, EnvironmentSection, MenuCategory } from './types';
 
 export const BOOKING_URL = "https://www.booking.com/hotel/es/rural-la-casona-de-tamaya-tamajon.html?aid=1365032&label=hotel-rural-la-casona-de-tamaya-8940598&chal_t=1769424374398&force_referer=https%3A%2F%2Fhotelmania.net%2F#availability_target";
 export const PHOTOS_URL = "https://photos.app.goo.gl/aDZb5LJTcp0UxtsXJ";
@@ -151,11 +151,76 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
   }
 ];
 
-export const MENU_HIGHLIGHTS = [
-  { name: 'Cabrito Asado de la Sierra', price: '22€', desc: 'Especialidad de la casa, cocinado en horno de leña.' },
-  { name: 'Judiones de la Granja', price: '14€', desc: 'Plato de cuchara tradicional para recuperar fuerzas.' },
-  { name: 'Menús Dietéticos', price: 'Consultar', desc: 'Preparamos menús para dietas especiales bajo petición.' },
-  { name: 'Tarta de Queso con Miel', price: '6.50€', desc: 'Casera y cremosa con miel de la Alcarria.' }
+export const RESTAURANT_MENU: MenuCategory[] = [
+  {
+    title: "Raciones y Tapas",
+    items: [
+      { name: "Finger de Pollo", price: "9.50€", desc: "Tiras de pollo crujiente con salsa miel y mostaza." },
+      { name: "Alitas de pollo", price: "8.50€", desc: "Alitas de pollo marinadas y fritas al estilo tradicional." },
+      { name: "Patatas Bravas", price: "7.00€", desc: "Con nuestra salsa brava casera picante." },
+      { name: "Patatas dos salsas", price: "7.50€", desc: "Bravas y alioli suave." },
+      { name: "Huevos rotos con Jamón", price: "12.00€", desc: "Patatas artesanas, huevos de corral y jamón ibérico." },
+      { name: "Croquetas de Jamón", price: "10.00€", desc: "Ración de 8 unidades de pura cremosidad casera." },
+      { name: "Morcilla", price: "9.00€", desc: "De Burgos, a la plancha con pimientos." },
+      { name: "Calamares", price: "11.00€", desc: "A la romana con un toque de limón." },
+      { name: "Tabla de Quesos", price: "16.00€", desc: "Variedad de quesos de la zona y nacionales." },
+      { name: "Ración de Jamón", price: "18.00€", desc: "Jamón ibérico de cebo de campo cortado al momento." },
+      { name: "Torreznos", price: "8.00€", desc: "De Soria, extra crujientes." },
+      { name: "Callos", price: "11.00€", desc: "Receta tradicional de la sierra." },
+      { name: "Tortilla de patata", price: "8.50€", desc: "Hecha al momento, con o sin cebolla." },
+      { name: "Ensaladilla Rusa", price: "8.00€", desc: "Clásica con ventresca de atún." },
+      { name: "Pimientos de Padrón", price: "7.50€", desc: "Unos pican y otros no." },
+      { name: "Chopitos o Rabas", price: "11.50€", desc: "Fritura andaluza de calidad." },
+      { name: "Oreja a la plancha", price: "9.50€", desc: "Con un toque de ajo y perejil." }
+    ]
+  },
+  {
+    title: "Ensaladas",
+    items: [
+      { name: "Ensalada Mixta tradicional", price: "9.00€", desc: "Lechuga, tomate, cebolla, huevo, atún y aceitunas." },
+      { name: "Ensalada César con pollo y picatostes", price: "11.50€", desc: "Con nuestra salsa César especial." },
+      { name: "Tomate de temporada con ventresca", price: "13.00€", desc: "Tomates de la zona con ventresca de calidad." }
+    ]
+  },
+  {
+    title: "Hamburguesas",
+    items: [
+      { name: "De la casa", price: "13.50€", desc: "Ternera, huevo frito, bacon, queso, cebolla y lechuga." },
+      { name: "Clásica", price: "11.00€", desc: "Ternera, queso cheddar, lechuga y tomate." },
+      { name: "De Pollo Crujiente", price: "11.50€", desc: "Pollo empanado, queso, lechuga y mayonesa." },
+      { name: "Vegana / Vegetariana", price: "12.50€", desc: "Hamburguesa vegetal con aguacate y brotes tiernos." }
+    ]
+  },
+  {
+    title: "Sándwiches",
+    items: [
+      { name: "Vegetal", price: "7.50€", desc: "Lechuga, tomate, huevo, espárragos y mayonesa." },
+      { name: "Mixto", price: "5.50€", desc: "Jamón york y queso fundido." },
+      { name: "Mixto con Huevo", price: "6.50€", desc: "El clásico con huevo a la plancha." },
+      { name: "Sándwich Club", price: "12.00€", desc: "Tres pisos con pollo, bacon, queso, lechuga y tomate." },
+      { name: "Sándwich Cubano", price: "11.50€", desc: "Cerdo asado, jamón, queso, mostaza y pepinillo." }
+    ]
+  },
+  {
+    title: "Tostas",
+    items: [
+      { name: "Solomillo Brie", price: "9.50€", desc: "Solomillo de cerdo con queso brie fundido." },
+      { name: "Solomillo Cabrales", price: "9.50€", desc: "Para los amantes del queso fuerte." },
+      { name: "Salmón y Queso Philadelphia", price: "9.00€", desc: "Un clásico ligero y sabroso." },
+      { name: "Queso de cabra con cebolla caramelizada", price: "8.50€", desc: "Con un toque de reducción de módena." },
+      { name: "Jamón ibérico con tomate triturado", price: "10.00€" },
+      { name: "Gulas con gambas al ajillo", price: "9.50€" }
+    ]
+  },
+  {
+    title: "Postres",
+    items: [
+      { name: "Tarta de Queso casera", price: "6.50€", desc: "Nuestra famosa tarta horneada." },
+      { name: "Tarta de Chocolate", price: "6.00€" },
+      { name: "Flan de huevo", price: "5.00€", desc: "Receta de la abuela." },
+      { name: "Helados variados", price: "4.50€" }
+    ]
+  }
 ];
 
 export const REVIEWS = [
