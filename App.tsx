@@ -305,7 +305,7 @@ function App() {
         return (
           <div className="pt-20 bg-stone-50 min-h-screen">
             <div className="relative h-[400px]">
-              <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" className="w-full h-full object-cover" alt="Restaurante" />
+              <img src="/images/restaurant_bar.jpg" className="w-full h-full object-cover" alt="Restaurante" />
               <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white">
                 <h1 className="text-5xl font-serif mb-2">Restaurante La Casona</h1>
                 <p className="text-xl font-light">Cocina tradicional con un toque de autor</p>
