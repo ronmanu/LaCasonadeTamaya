@@ -36,6 +36,17 @@ export interface BookingRequest {
   comments: string;
 }
 
+export interface MenuItem {
+  name: string;
+  price: string;
+  desc?: string;
+}
+
+export interface MenuCategory {
+  title: string;
+  items: MenuItem[];
+}
+
 export enum PageState {
   HOME,
   ROOMS,

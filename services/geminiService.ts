@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { BOOKING_URL, HOTEL_CONDITIONS, ENVIRONMENT_INFO, RESTAURANT_MENU } from '../constants';
 
 // Intentamos obtener la API Key, pero no fallamos si no existe
-const apiKey = process.env.API_KEY || '';
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 let ai: GoogleGenAI | null = null;
 
 if (apiKey) {
