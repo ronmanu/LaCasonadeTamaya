@@ -1,5 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
-import { BOOKING_URL, HOTEL_CONDITIONS, ENVIRONMENT_INFO, MENU_HIGHLIGHTS } from '../constants';
+import { BOOKING_URL, HOTEL_CONDITIONS, ENVIRONMENT_INFO, RESTAURANT_MENU } from '../constants';
 
 // Intentamos obtener la API Key, pero no fallamos si no existe
 const apiKey = process.env.API_KEY || '';
@@ -21,7 +21,8 @@ INFORMACIÓN ACTUALIZADA:
 - Check-in: ${HOTEL_CONDITIONS.checkIn}.
 - Check-out: ${HOTEL_CONDITIONS.checkOut}.
 - Mascotas: ${HOTEL_CONDITIONS.pets}.
-- Desayuno/Comidas: Tenemos restaurante. Platos destacados: Cabrito asado, Judiones.
+- Desayuno/Comidas: Tenemos restaurante con carta completa de raciones, carnes y postres caseros.
+- Platos destacados: Torreznos crujientes, Huevos rotos con jamón, tarta de queso casera.
 - Entorno: Ciudad Encantada, Arquitectura Negra, Hayedo Tejera Negra.
 
 Tus objetivos:
@@ -40,7 +41,7 @@ const getOfflineAnswer = (question: string): string => {
   if (q.includes('reserva') || q.includes('precio') || q.includes('disponib')) {
     return `Para consultar precios y disponibilidad exactos, por favor visita nuestro motor de reservas: ${BOOKING_URL}. O llámanos al 681 27 95 08.`;
   }
-  
+
   if (q.includes('mascota') || q.includes('perro') || q.includes('gato') || q.includes('animal')) {
     return `Sobre las mascotas: ${HOTEL_CONDITIONS.pets}.`;
   }
@@ -50,8 +51,8 @@ const getOfflineAnswer = (question: string): string => {
   }
 
   if (q.includes('comer') || q.includes('cena') || q.includes('desayuno') || q.includes('restaurante') || q.includes('menu')) {
-    const plato = MENU_HIGHLIGHTS[0].name;
-    return `¡Tenemos un restaurante fantástico! Te recomendamos probar el ${plato}. Hacemos menús dietéticos bajo petición.`;
+    const plato = RESTAURANT_MENU[0].items[5].name; // Croquetas de Jamón
+    return `¡Tenemos un restaurante fantástico! Te recomendamos probar las ${plato}. Tenemos una amplia carta de raciones, hamburguesas y tostas.`;
   }
 
   if (q.includes('coche') || q.includes('parking') || q.includes('aparca')) {
@@ -94,6 +95,6 @@ export const askConcierge = async (question: string): Promise<string> => {
 
   // 2. Si NO tenemos API Key, usamos el modo offline gratuito
   // Simulamos un pequeño retraso para que parezca que "piensa"
-  await new Promise(resolve => setTimeout(resolve, 600)); 
+  await new Promise(resolve => setTimeout(resolve, 600));
   return getOfflineAnswer(question);
 };
