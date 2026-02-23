@@ -262,7 +262,7 @@ export const GALLERY_IMAGES = [
   { src: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?q=80&w=1200", category: "Exteriores", caption: "Porche de piedra tradicional" },
 
   // Invierno (Basado en fotos de nieve)
-  { src: "https://images.unsplash.com/photo-1483323326164-9b8449c25dbf?q=80&w=1200", category: "Invierno", caption: "La Casona bajo la nieve" },
+  { src: "/images/casona_nieve.jpg", category: "Invierno", caption: "La Casona bajo la nieve" },
   { src: "/images/tamajon_invierno.jpg", category: "Invierno", caption: "Tamajón en invierno" },
 
   // Entorno (Vistas y Paisaje)
