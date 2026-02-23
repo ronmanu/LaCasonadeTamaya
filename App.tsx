@@ -217,9 +217,13 @@ function App() {
       case PageState.ROOMS:
         return (
           <div className="pt-20">
-            <div className="bg-stone-800 text-white py-12 px-4 text-center">
-              <h1 className="text-4xl font-serif">Nuestras Estancias</h1>
-              <p className="mt-2 text-stone-400">Habitaciones climatizadas con baño privado y artículos de aseo gratis</p>
+            <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
+              <img src="/images/habitaciones_bg.webp" className="absolute inset-0 w-full h-full object-cover" alt="Nuestras Estancias" />
+              <div className="absolute inset-0 bg-black/60"></div>
+              <div className="relative z-10 text-white text-center px-4">
+                <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Nuestras Estancias</h1>
+                <p className="text-xl text-stone-200 font-light max-w-2xl mx-auto">Habitaciones climatizadas con baño privado y artículos de aseo gratis</p>
+              </div>
             </div>
             <RoomList onSelectRoom={setSelectedRoom} />
           </div>
