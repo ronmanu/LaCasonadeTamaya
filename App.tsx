@@ -8,7 +8,7 @@ import { BookingModal } from './components/BookingModal';
 import { Gallery } from './components/Gallery';
 import { ROOMS, ENVIRONMENT_INFO, RESTAURANT_MENU, HOTEL_CONDITIONS, HOTEL_SERVICES, REVIEWS } from './constants';
 import { PageState, Room } from './types';
-import { Map, Mountain, Utensils, ArrowRight, Clock, Info, CheckCircle, Wifi, Ban, Car, AlertCircle, Star, Quote, Leaf, Camera, Loader2 } from 'lucide-react';
+import { Map, Mountain, Utensils, ArrowRight, Clock, Info, CheckCircle, Wifi, Ban, Car, AlertCircle, Star, Quote, Leaf, Camera, Loader2, Phone } from 'lucide-react';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageState>(PageState.HOME);
