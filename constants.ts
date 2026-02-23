@@ -95,7 +95,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'tamajon-pueblo',
     title: 'Tamajón: Historia y Piedra',
     subtitle: 'La Pequeña Ciudad Encantada',
-    image: 'https://images.unsplash.com/photo-1533036437199-a477373f15a6?q=80&w=1200&auto=format&fit=crop', // Landscape with rocks/history vibe
+    image: '/images/tamajon_ciudad_encantada.jpg', // Foto local de la Ciudad Encantada de Tamajón
     content: [
       "Tamajón no es solo un punto de paso, es un destino en sí mismo. Al norte del pueblo, la naturaleza ha esculpido durante milenios lo que conocemos como la 'Ciudad Encantada'. Un paisaje kárstico donde la piedra caliza cobra vida formando arcos, cuevas y figuras caprichosas entre sabinas centenarias. Es un paseo imprescindible y sencillo, perfecto para perderse y conectar con la quietud de 2026.",
       "Dentro del casco urbano, la historia nos habla a través de la Iglesia de la Asunción, cuyos orígenes románicos del siglo XIII se entrelazan con una magnífica arquitectura renacentista. La luz de la Sierra Norte baña sus muros de piedra dorada, creando un contraste único con las cubiertas de pizarra que anuncian la cercanía de los Pueblos Negros."
