@@ -7,8 +7,8 @@ export const PHOTOS_URL = "https://photos.app.goo.gl/aDZb5LJTcp0UxtsXJ";
 export const HERO_IMAGE = "/images/hero.jpg";
 
 export const HOTEL_CONDITIONS = {
-  checkIn: "12:00 - 14:00",
-  checkOut: "12:00 - 13:30",
+  checkIn: "14:00 - 15:00",
+  checkOut: "12:00 - 13:00",
   minAge: 18,
   pets: "No se admiten",
   smoking: "Prohibido fumar en todo el establecimiento",
