@@ -268,5 +268,5 @@ export const GALLERY_IMAGES = [
   // Entorno (Vistas y Paisaje)
   { src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200", category: "Entorno", caption: "Vistas al Pico Ocejón" },
   { src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1200", category: "Entorno", caption: "Atardecer en la Sierra Norte" },
-  { src: "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=1200", category: "Exteriores", caption: "Atardecer en la terraza" }
+  { src: "/images/terraza_atardecer.jpg", category: "Exteriores", caption: "Atardecer en la terraza" }
 ];
