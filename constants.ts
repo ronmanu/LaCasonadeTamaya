@@ -23,7 +23,8 @@ export const HOTEL_SERVICES = [
   "Jardín y Terraza amueblada",
   "Menús dietéticos (bajo petición)",
   "Habitaciones familiares",
-  "Guardaequipaje y parking de bicis"
+  "Guardaequipaje y parking de bicis",
+  "Televisión en habitaciones"
 ];
 
 export const ROOMS: Room[] = [
