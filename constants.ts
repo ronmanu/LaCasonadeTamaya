@@ -3,8 +3,8 @@ import { Room, Activity, EnvironmentSection, MenuCategory } from './types';
 export const BOOKING_URL = "https://www.booking.com/hotel/es/rural-la-casona-de-tamaya-tamajon.html?aid=1365032&label=hotel-rural-la-casona-de-tamaya-8940598&chal_t=1769424374398&force_referer=https%3A%2F%2Fhotelmania.net%2F#availability_target";
 export const PHOTOS_URL = "https://photos.app.goo.gl/aDZb5LJTcp0UxtsXJ";
 
-// Imagen principal actualizada: Estilo atardecer en porche de piedra (similar a caption.jpg)
-export const HERO_IMAGE = "/images/hero.jpg";
+// Imagen principal actualizada: Estilo atardecer en porche de piedra (similar a caption.webp)
+export const HERO_IMAGE = "/images/hero.webp";
 
 export const HOTEL_CONDITIONS = {
   checkIn: "14:00 - 15:00",
@@ -29,40 +29,103 @@ export const HOTEL_SERVICES = [
 
 export const ROOMS: Room[] = [
   {
-    id: 'doble-matrimonio',
-    name: 'Doble Rústica',
-    description: 'Encanto tradicional con cabecero de madera maciza y vigas vistas. Decoración cálida en tonos ocres y rojizos con suelos de terracota.',
+    id: 'hab-1',
+    name: 'Habitación 1 - Doble "Azul y Sol"',
+    description: 'Encanto rústico con paredes amarillas y un mural artístico que evoca la luz y el cielo.',
     price: 85,
     capacity: 2,
-    image: 'https://images.unsplash.com/photo-1560185009-dddeb820c7b7?q=80&w=1000&auto=format&fit=crop',
-    features: ['20 m²', 'Cama de Matrimonio', 'Vigas de Madera', 'Baño Privado', 'Vistas al Jardín']
+    image: '/images/habitacion_1.webp',
+    features: ['Matrimonio', 'Decoración rústica', 'Mural artístico', 'Baño Privado']
   },
   {
-    id: 'doble-twin',
-    name: 'Doble Piedra (2 Camas)',
-    description: 'Habitación luminosa caracterizada por sus hermosos zócalos de piedra natural en las paredes y decoración alegre.',
+    id: 'hab-2',
+    name: 'Habitación 2 - Doble Rústica',
+    description: 'Nuestra habitación más emblemática, con mural de flores amarillas sobre fondo azul cielo.',
     price: 85,
     capacity: 2,
-    image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=1000&auto=format&fit=crop',
-    features: ['20 m²', '2 Camas Individuales', 'Paredes de Piedra', 'Escritorio', 'Mucha luz natural']
+    image: '/images/habitacion_2.webp',
+    features: ['Matrimonio', 'Techo de Madera', 'Flores Silvestres', 'Terrazo/Terracota']
   },
   {
-    id: 'triple-arte',
-    name: 'Triple "El Mural"',
-    description: 'Estancia única y especial decorada con murales artísticos pintados a mano que evocan la naturaleza y la fantasía. Ideal para familias.',
-    price: 115,
-    capacity: 3,
-    image: 'https://images.unsplash.com/photo-1616486029423-aaa478965c96?q=80&w=1000&auto=format&fit=crop',
-    features: ['1 Cama Doble + 1 Individual', 'Murales Artísticos', 'Ambiente Relajante', 'Baño Completo']
+    id: 'hab-3',
+    name: 'Habitación 3 - Doble "El Árbol"',
+    description: 'Ambiente sereno en tonos neutros presidido por una obra que representa la sabiduría de la naturaleza.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_3.webp',
+    features: ['Matrimonio', 'Ambiente Sereno', 'Vistas Exterior', 'Malla Wi-Fi']
   },
   {
-    id: 'cuadruple',
-    name: 'Familiar La Casona',
-    description: 'Nuestra estancia más amplia. Combina el encanto de la piedra vista con murales suaves y espacio para 4 personas.',
+    id: 'hab-4',
+    name: 'Habitación 4 - Doble "Danza"',
+    description: 'Decoración vibrante con murales de suaves figuras danzantes en tonos turquesa y tierra.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_4.webp',
+    features: ['Matrimonio', 'Paredes Turquesa', 'Mural Artístico', 'Confort Rústico']
+  },
+  {
+    id: 'hab-5',
+    name: 'Habitación 5 - Doble Piedra (2 Camas)',
+    description: 'La esencia de la montaña con paredes que combinan la calidez de la pintura y la solidez de la piedra.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_5.webp',
+    features: ['2 Camas Individuales', 'Detalle en Piedra', 'Mural de Amapolas', 'Escritorio rústico']
+  },
+  {
+    id: 'hab-6',
+    name: 'Habitación 6 - Doble "La Luna"',
+    description: 'Estancia íntima con un mural onírico de una figura bajo la luna en tonos rosa y cereza.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_6.webp',
+    features: ['Matrimonio', 'Mural Onírico', 'Iluminación Cálida', 'Cama de Hierro/Madera']
+  },
+  {
+    id: 'hab-7',
+    name: 'Habitación 7 - Doble "Las Ninfas"',
+    description: 'Murales que fluyen entre figuras y naturaleza en una estancia con dos camas individuales.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_7.webp',
+    features: ['2 Camas Individuales', 'Mural de Figuras', 'Decoración Natural', 'Baño Completo']
+  },
+  {
+    id: 'hab-8',
+    name: 'Habitación 8 - Doble Rústica (2 Camas)',
+    description: 'Sencillez y confort rústico con mobiliario de madera tradicional y ambiente acogedor.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_8.webp',
+    features: ['2 Camas Individuales', 'Estilo Tradicional', 'Mucha Luz', 'Ideal Parejas/Amigos']
+  },
+  {
+    id: 'hab-9',
+    name: 'Habitación 9 - Doble "Damas del Campo"',
+    description: 'Habitación con dos camas individuales y un gran mural que representa figuras en el campo.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_9.webp',
+    features: ['2 Camas Individuales', 'Mural Gran Formato', 'Vigas a la Vista', 'Televisión']
+  },
+  {
+    id: 'hab-10',
+    name: 'Habitación 10 - Doble Rústica "Botánica"',
+    description: 'Amplia y luminosa, con dos camas individuales y decoración inspirada en la flora local.',
+    price: 85,
+    capacity: 2,
+    image: '/images/habitacion_10.webp',
+    features: ['2 Camas Individuales', 'Techo de Madera', 'Toallas Incluidas', 'Suelos de Barro']
+  },
+  {
+    id: 'hab-11',
+    name: 'Habitación 11 - Familiar "La Casona"',
+    description: 'Nuestra suite más espaciosa, ideal para familias o grupos pequeños con gran capacidad.',
     price: 140,
     capacity: 4,
-    image: 'https://images.unsplash.com/photo-1512918760532-3ad8386b8398?q=80&w=1000&auto=format&fit=crop',
-    features: ['40 m²', '4 Camas', 'Zona de Estar', 'Gran Bañera', 'Ideal Grupos']
+    image: '/images/habitacion_11.webp',
+    features: ['Cama Matrimonio + 2 Indiv.', 'Espacio Extra', 'Ideal Familias', 'Vistas de Ensueño']
   }
 ];
 
@@ -72,21 +135,21 @@ export const ACTIVITIES: Activity[] = [
     id: 'act-1',
     title: 'Ciudad Encantada de Tamajón',
     description: 'Formaciones de piedra caliza moldeadas por el agua y el viento durante siglos. Un paseo mágico a pocos minutos del hotel.',
-    image: 'https://picsum.photos/800/500?random=10',
+    image: '/images/tamajon_ciudad_encantada.webp',
     icon: 'history'
   },
   {
     id: 'act-2',
     title: 'Ruta de la Arquitectura Negra',
     description: 'Descubre los pueblos de pizarra negra: Campillo de Ranas, Majaelrayo y Valverde de los Arroyos.',
-    image: 'https://picsum.photos/800/500?random=11',
+    image: '/images/pueblo_negro.webp',
     icon: 'mountain'
   },
   {
     id: 'act-3',
     title: 'Micología y Senderismo',
     description: 'Entorno ideal para piragüismo y senderismo. En otoño, zona privilegiada para la búsqueda de setas.',
-    image: 'https://picsum.photos/800/500?random=12',
+    image: '/images/setas_entorno.webp',
     icon: 'mushroom'
   }
 ];
@@ -96,7 +159,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'tamajon-pueblo',
     title: 'Tamajón: Historia y Piedra',
     subtitle: 'La Pequeña Ciudad Encantada',
-    image: '/images/tamajon_ciudad_encantada.jpg', // Foto local de la Ciudad Encantada de Tamajón
+    image: '/images/tamajon_ciudad_encantada.webp', // Foto local de la Ciudad Encantada de Tamajón
     content: [
       "Tamajón no es solo un punto de paso, es un destino en sí mismo. Al norte del pueblo, la naturaleza ha esculpido durante milenios lo que conocemos como la 'Ciudad Encantada'. Un paisaje kárstico donde la piedra caliza cobra vida formando arcos, cuevas y figuras caprichosas entre sabinas centenarias. Es un paseo imprescindible y sencillo, perfecto para perderse y conectar con la quietud de 2026.",
       "Dentro del casco urbano, la historia nos habla a través de la Iglesia de la Asunción, cuyos orígenes románicos del siglo XIII se entrelazan con una magnífica arquitectura renacentista. La luz de la Sierra Norte baña sus muros de piedra dorada, creando un contraste único con las cubiertas de pizarra que anuncian la cercanía de los Pueblos Negros."
@@ -111,7 +174,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'arquitectura-negra',
     title: 'La Ruta de la Arquitectura Negra',
     subtitle: 'El alma de pizarra de Guadalajara',
-    image: '/images/pueblo_negro.jpg', // Foto local de la Ruta de la Arquitectura Negra
+    image: '/images/pueblo_negro.webp', // Foto local de la Ruta de la Arquitectura Negra
     content: [
       "Desde La Casona de Tamaya se abren las puertas a uno de los tesoros etnográficos más singulares de Europa. La Arquitectura Negra debe su nombre al uso masivo de la pizarra en muros y cubiertas, mimetizando las aldeas con el paisaje oscuro y abrupto de la sierra.",
       "La ruta serpentea hacia el norte. Campillo de Ranas, con su atmósfera casi mística; Majaelrayo, a los pies del pico Ocejón; y Valverde de los Arroyos, uno de los pueblos más bonitos de España, donde la pizarra se combina con cuarcita dorada. En 2026, estos pueblos mantienen intacta su esencia, ofreciendo un silencio y una estética que parecen detener el tiempo."
@@ -125,7 +188,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'micologia',
     title: 'Paraíso Micológico',
     subtitle: 'Temporada 2025-2026',
-    image: '/images/setas_entorno.jpg', // Foto local de setas para la sección micológica
+    image: '/images/setas_entorno.webp', // Foto local de setas para la sección micológica
     content: [
       "Cuando las lluvias de otoño bañan la Sierra Norte, Tamajón se transforma. Nuestro suelo es uno de los más ricos de Castilla-La Mancha para la micología. Somos puerta de entrada a parques micológicos regulados donde el buscador respetuoso puede encontrar auténticos tesoros.",
       "Níscalos (Lactarius deliciosus) bajo los pinares y el preciado Boletus edulis en los robledales son los protagonistas de nuestras cestas. Para la temporada 2025-2026, recordamos la importancia de obtener el permiso diario (disponible online o en el pueblo) y de usar siempre cesta de mimbre para permitir que las esporas sigan sembrando el futuro de nuestros bosques."
@@ -140,7 +203,7 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'naturaleza-hayedos',
     title: 'Hayedos y Cumbres',
     subtitle: 'El Ocejón y Tejera Negra',
-    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop', // Forest/Nature
+    image: '/images/hayedos_cumbres.webp',
     content: [
       "Para los amantes del senderismo, el Pico Ocejón (2.048m) es el vigía constante de nuestra comarca. Su ascensión es un clásico que recompensa con vistas inigualables de toda la provincia.",
       "A poca distancia, la naturaleza estalla en color, especialmente en otoño. El Hayedo de Tejera Negra, Patrimonio de la Humanidad, ofrece una experiencia cromática inolvidable, aunque requiere reserva previa en temporada alta. Como alternativa más tranquila y cercana, el Hayedo de la Pedrosa en Riofrío de Riaza ofrece un espectáculo similar, íntimo y sobrecogedor."
@@ -252,22 +315,41 @@ export const REVIEWS = [
 ];
 
 export const GALLERY_IMAGES = [
-  // Habitaciones
-  { src: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=1200", category: "Habitaciones", caption: "Habitación Doble con encanto" },
-  { src: "https://images.unsplash.com/photo-1616486029423-aaa478965c96?q=80&w=1200", category: "Habitaciones", caption: "Murales artísticos pintados a mano" },
-  { src: "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=1200", category: "Habitaciones", caption: "Habitación Twin luminosa" },
+  // Habitaciones - Fotos reales
+  { src: "/images/habitacion_1.webp", category: "Habitaciones", caption: "Habitación 1 - Doble \"Azul y Sol\"" },
+  { src: "/images/habitacion_2.webp", category: "Habitaciones", caption: "Habitación 2 - Doble Rústica" },
+  { src: "/images/habitacion_3.webp", category: "Habitaciones", caption: "Habitación 3 - Doble Matrimonio - \"El Árbol\"" },
+  { src: "/images/habitacion_4.webp", category: "Habitaciones", caption: "Habitación 4 - Doble Matrimonio - \"Danza\"" },
+  { src: "/images/habitacion_5.webp", category: "Habitaciones", caption: "Habitación 5 - Doble Piedra (2 Camas)" },
+  { src: "/images/habitacion_6.webp", category: "Habitaciones", caption: "Habitación 6 - Doble \"La Luna\"" },
+  { src: "/images/habitacion_7.webp", category: "Habitaciones", caption: "Habitación 7 - Doble \"Las Ninfas\" (2 Camas)" },
+  { src: "/images/habitacion_8.webp", category: "Habitaciones", caption: "Habitación 8 - Doble Rústica (2 Camas)" },
+  { src: "/images/habitacion_9.webp", category: "Habitaciones", caption: "Habitación 9 - Doble \"Damas del Campo\"" },
+  { src: "/images/habitacion_10.webp", category: "Habitaciones", caption: "Habitación 10 - Doble Rústica \"Botánica\"" },
+  { src: "/images/habitacion_11.webp", category: "Habitaciones", caption: "Habitación 11 - Familiar \"La Casona\"" },
 
-  // Jardín y Exteriores (Basado en fotos de rosas, cama elástica, fachada)
-  { src: "https://images.unsplash.com/photo-1558293842-c0fd3db86157?q=80&w=1200", category: "Jardín", caption: "Jardines llenos de vida" },
-  { src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200", category: "Jardín", caption: "Zona de juegos y descanso" },
-  { src: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?q=80&w=1200", category: "Exteriores", caption: "Porche de piedra tradicional" },
+  // Jardín y Exteriores - Fotos reales
+  { src: "/images/jardin_rosas.webp", category: "Jardín", caption: "Jardín de rosas de La Casona" },
+  { src: "/images/ext_galeria_1.webp", category: "Exteriores", caption: "Vistas exteriores del hotel" },
+  { src: "/images/ext_galeria_2.webp", category: "Exteriores", caption: "Entorno natural de La Casona" },
+  { src: "/images/ext_galeria_3.webp", category: "Exteriores", caption: "Fachada y jardines" },
+  { src: "/images/ext_galeria_4.webp", category: "Exteriores", caption: "Terraza y exteriores" },
+  { src: "/images/ext_galeria_5.webp", category: "Exteriores", caption: "Espacios al aire libre" },
 
-  // Invierno (Basado en fotos de nieve)
-  { src: "/images/casona_nieve.jpg", category: "Invierno", caption: "La Casona bajo la nieve" },
-  { src: "/images/tamajon_invierno.jpg", category: "Invierno", caption: "Tamajón en invierno" },
+  // Restaurante e Interiores - Fotos reales
+  { src: "/images/barra_bar.webp", category: "Restaurante", caption: "Barra del bar con encanto rústico" },
+  { src: "/images/salon_principal.webp", category: "Restaurante", caption: "Comedor principal con manteles de cuadros" },
+  { src: "/images/salon_principal_2.webp", category: "Restaurante", caption: "Vista del salón comedor" },
+  { src: "/images/salon_privado.webp", category: "Restaurante", caption: "Salón privado para 10 personas" },
+  { src: "/images/recibidor.webp", category: "Interiores", caption: "Recibidor con decoración tradicional" },
+  { src: "/images/recibidor_2.webp", category: "Interiores", caption: "Hall de entrada" },
+  { src: "/images/pasillo.webp", category: "Interiores", caption: "Pasillo con vigas de madera" },
+  { src: "/images/cuarto_estar.webp", category: "Interiores", caption: "Cuarto de estar" },
 
-  // Entorno (Vistas y Paisaje)
-  { src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200", category: "Entorno", caption: "Vistas al Pico Ocejón" },
-  { src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1200", category: "Entorno", caption: "Atardecer en la Sierra Norte" },
-  { src: "/images/terraza_atardecer.jpg", category: "Exteriores", caption: "Atardecer en la terraza" }
+  // Invierno
+  { src: "/images/casona_nieve.webp", category: "Invierno", caption: "La Casona bajo la nieve" },
+  { src: "/images/tamajon_invierno.webp", category: "Invierno", caption: "Tamajón en invierno" },
+
+  // Entorno
+  { src: "/images/terraza_atardecer.webp", category: "Exteriores", caption: "Atardecer en la terraza" }
 ];

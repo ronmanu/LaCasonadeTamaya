@@ -194,7 +194,7 @@ function App() {
 
             {/* Restaurant Preview */}
             <section className="py-20 bg-stone-900 text-stone-200 relative overflow-hidden">
-              <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1514362545857-3bc16549766b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center"></div>
+              <div className="absolute inset-0 opacity-20 bg-[url('/images/salon_principal.webp')] bg-cover bg-center"></div>
               <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-12">
                 <div className="flex-1">
                   <h2 className="text-4xl font-serif text-white mb-6">Sabores de la Tierra</h2>
@@ -206,8 +206,8 @@ function App() {
                   </button>
                 </div>
                 <div className="flex-1 grid grid-cols-2 gap-4">
-                  <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=500&auto=format&fit=crop&q=60" className="rounded-lg shadow-lg translate-y-4" alt="Carne" />
-                  <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=60" className="rounded-lg shadow-lg -translate-y-4" alt="Plato" />
+                  <img src="/images/salon_principal_2.webp" className="rounded-lg shadow-lg translate-y-4" alt="Salón comedor" />
+                  <img src="/images/barra_bar.webp" className="rounded-lg shadow-lg -translate-y-4" alt="Barra del bar" />
                 </div>
               </div>
             </section>
@@ -240,7 +240,7 @@ function App() {
         return (
           <div className="pt-20 bg-stone-50 min-h-screen">
             <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
-              <img src="/images/pueblos_negros.jpg" className="absolute inset-0 w-full h-full object-cover object-top" alt="El Entorno" />
+              <img src="/images/pueblos_negros.webp" className="absolute inset-0 w-full h-full object-cover object-top" alt="El Entorno" />
               <div className="absolute inset-0 bg-black/50"></div>
               <div className="relative z-10 text-white text-center px-4">
                 <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">El Entorno</h1>
@@ -313,7 +313,7 @@ function App() {
         return (
           <div className="pt-20 bg-stone-50 min-h-screen">
             <div className="relative h-[400px]">
-              <img src="/images/restaurant_bar.jpg" className="w-full h-full object-cover" alt="Restaurante" />
+              <img src="/images/restaurant_bar.webp" className="w-full h-full object-cover" alt="Restaurante" />
               <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white">
                 <h1 className="text-5xl font-serif mb-2">Restaurante La Casona</h1>
                 <p className="text-xl font-light">Cocina tradicional con un toque de autor</p>
