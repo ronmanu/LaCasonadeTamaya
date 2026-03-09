@@ -140,29 +140,42 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
     };
 
     const toggleOccupancy = async (roomId: string) => {
-        const current = roomDetails[roomId]?.is_occupied || false;
-        const next = !current;
+        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0 };
+        const next = !existing.is_occupied;
+
         setRoomDetails(prev => ({
             ...prev,
-            [roomId]: { ...prev[roomId], is_occupied: next }
+            [roomId]: { ...existing, is_occupied: next }
         }));
+
         const { error } = await supabase.from('room_details').upsert({
             room_id: roomId,
             is_occupied: next
         }, { onConflict: 'room_id' });
-        if (error) alert('Error ocupación: ' + error.message);
+
+        if (error) {
+            console.error('Error ocupación:', error);
+            fetchData(); // Rollback/Sync
+        }
     };
 
     const updateRoomPrice = async (roomId: string, newPrice: number) => {
+        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0 };
+
         setRoomDetails(prev => ({
             ...prev,
-            [roomId]: { ...prev[roomId], price_per_night: newPrice }
+            [roomId]: { ...existing, price_per_night: newPrice }
         }));
+
         const { error } = await supabase.from('room_details').upsert({
             room_id: roomId,
             price_per_night: newPrice
         }, { onConflict: 'room_id' });
-        if (error) alert('Error precio: ' + error.message);
+
+        if (error) {
+            console.error('Error precio:', error);
+            fetchData(); // Rollback/Sync
+        }
         setIsEditingPrice(null);
     };
 
@@ -350,12 +363,12 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                                                         <button
                                                             onClick={() => {
                                                                 setIsEditingPrice(room.id);
-                                                                setTempPrice(rDetails.price_per_night.toString());
+                                                                setTempPrice((rDetails.price_per_night || 0).toString());
                                                             }}
                                                             className="text-[10px] font-bold text-stone-400 hover:text-stone-600 transition-colors flex items-center gap-1"
                                                             title="Editar precio por noche"
                                                         >
-                                                            {rDetails.price_per_night.toFixed(2)}€/noche
+                                                            {(rDetails.price_per_night || 0).toFixed(2)}€/noche
                                                         </button>
                                                     )}
                                                 </div>
@@ -377,8 +390,8 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                                         <button
                                             onClick={() => toggleOccupancy(room.id)}
                                             className={`flex flex-col p-2 rounded-lg border text-left transition-all ${rDetails.is_occupied
-                                                    ? 'bg-amber-50 border-amber-200 text-amber-700'
-                                                    : 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                                                ? 'bg-amber-50 border-amber-200 text-amber-700'
+                                                : 'bg-emerald-50 border-emerald-200 text-emerald-700'
                                                 }`}
                                         >
                                             <span className="text-[8px] uppercase font-bold opacity-60">Ocupación</span>
