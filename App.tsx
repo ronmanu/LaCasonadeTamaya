@@ -275,7 +275,7 @@ const RestaurantPage: React.FC<{ setCurrentPage: (p: PageState) => void }> = ({ 
 const ContactPage: React.FC<{ contactForm: any, contactStatus: string, handleContactChange: (e: any) => void, handleContactSubmit: (e: any) => void, setContactStatus: (s: any) => void }> = ({ contactForm, contactStatus, handleContactChange, handleContactSubmit, setContactStatus }) => (
   <div className="pt-20 bg-stone-50 min-h-screen">
     <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
-      <img src="/images/tamajon_iglesia_nieve.webp" className="absolute inset-0 w-full h-full object-cover" alt="Contacto" />
+      <img src="/images/paisaje_nevado.webp" className="absolute inset-0 w-full h-full object-cover" alt="Contacto" />
       <div className="absolute inset-0 bg-black/40"></div>
       <h1 className="relative z-10 text-4xl md:text-5xl font-serif font-bold text-white tracking-wide">Contacto</h1>
     </div>
