@@ -75,6 +75,27 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
         if (error) alert('Error limpieza: ' + error.message);
     };
 
+    const BAR_PRODUCTS = [
+        { name: 'Café', price: 1.50 },
+        { name: 'Caña / Cerveza', price: 2.50 },
+        { name: 'Botella Agua', price: 1.80 },
+        { name: 'Refresco', price: 2.50 },
+        { name: 'Copa Vino', price: 3.00 },
+        { name: 'Desayuno Buffet', price: 12.00 },
+        { name: 'Cena Menú', price: 25.00 },
+        { name: 'Media Pensión', price: 35.00 },
+        { name: 'Ración Ibericos', price: 18.00 },
+        { name: 'Suplemento Mascota', price: 10.00 },
+    ];
+
+    const handleProductSelect = (productName: string) => {
+        if (!productName) return;
+        const product = BAR_PRODUCTS.find(p => p.name === productName);
+        if (product) {
+            setNewCharge({ ...newCharge, concept: product.name, unitPrice: product.price.toString() });
+        }
+    };
+
     const addCharge = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newCharge.room || !newCharge.concept || !newCharge.unitPrice) return;
@@ -175,23 +196,34 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                         <button onClick={clearCharges} className="text-stone-300 hover:text-red-500"><Trash2 size={18} /></button>
                     </div>
 
-                    <div className="p-4 bg-stone-50 border-b border-stone-100 flex gap-2">
-                        <select value={selectedRoomFilter} onChange={e => setSelectedRoomFilter(e.target.value)} className="text-xs font-bold p-1 rounded border">
-                            <option value="">Filtro: Todas</option>
-                            {ROOMS.map(r => <option key={r.id} value={r.name.split(' ')[1]}>{r.name.split(' ')[1]}</option>)}
-                        </select>
+                    <div className="p-4 bg-stone-50 border-b border-stone-100 flex gap-4">
+                        <div className="flex flex-col gap-1 flex-1">
+                            <span className="text-[9px] font-bold text-stone-400 uppercase">Filtro Vista:</span>
+                            <select value={selectedRoomFilter} onChange={e => setSelectedRoomFilter(e.target.value)} className="text-xs font-bold p-2 rounded border bg-white outline-none">
+                                <option value="">Todas las habitaciones</option>
+                                {ROOMS.map(r => <option key={r.id} value={r.name.split(' ')[1]}>{r.name.split(' ')[1]}</option>)}
+                            </select>
+                        </div>
+                        <div className="flex flex-col gap-1 flex-1">
+                            <span className="text-[9px] font-bold text-stone-400 uppercase">Productos Rápidos:</span>
+                            <select onChange={e => handleProductSelect(e.target.value)} className="text-xs font-bold p-2 rounded border bg-blue-50 border-blue-100 outline-none">
+                                <option value="">Selecciona...</option>
+                                {BAR_PRODUCTS.map(p => <option key={p.name} value={p.name}>{p.name} ({p.price}€)</option>)}
+                            </select>
+                        </div>
                     </div>
 
-                    <form onSubmit={addCharge} className="p-4 flex flex-wrap gap-2 border-b border-stone-100">
-                        <select value={newCharge.room} onChange={e => setNewCharge({ ...newCharge, room: e.target.value })} className="flex-1 p-2 border rounded text-xs" required>
+                    <form onSubmit={addCharge} className="p-4 flex flex-wrap gap-2 border-b border-stone-100 bg-stone-50/20">
+                        <select value={newCharge.room} onChange={e => setNewCharge({ ...newCharge, room: e.target.value })} className="w-16 p-2 border rounded text-xs" required>
                             <option value="">Hab.</option>
                             {ROOMS.map(r => <option key={r.id} value={r.name.split(' ')[1]}>{r.name.split(' ')[1]}</option>)}
                         </select>
-                        <input type="text" placeholder="Concepto" value={newCharge.concept} onChange={e => setNewCharge({ ...newCharge, concept: e.target.value })} className="flex-[2] p-2 border rounded text-xs" required />
+                        <input type="text" placeholder="Concepto personalizado" value={newCharge.concept} onChange={e => setNewCharge({ ...newCharge, concept: e.target.value })} className="flex-1 p-2 border rounded text-xs" required />
                         <input type="number" placeholder="Cant." value={newCharge.quantity} onChange={e => setNewCharge({ ...newCharge, quantity: e.target.value })} className="w-12 p-2 border rounded text-xs" required />
                         <input type="number" step="0.01" placeholder="Precio" value={newCharge.unitPrice} onChange={e => setNewCharge({ ...newCharge, unitPrice: e.target.value })} className="w-16 p-2 border rounded text-xs" required />
-                        <button type="submit" className="bg-stone-900 text-white px-3 py-2 rounded"><Plus size={16} /></button>
+                        <button type="submit" className="bg-stone-900 text-white px-3 py-2 rounded hover:bg-stone-800"><Plus size={16} /></button>
                     </form>
+
 
                     <div className="flex-grow overflow-y-auto p-4 space-y-2">
                         {filteredCharges.map((c) => (
