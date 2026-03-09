@@ -22,20 +22,20 @@ export const RoomList: React.FC<RoomListProps> = ({ onSelectRoom }) => {
         {ROOMS.map((room) => (
           <div key={room.id} className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col">
             <div className="relative h-64 overflow-hidden">
-              <img 
-                src={room.image} 
-                alt={room.name} 
+              <img
+                src={room.image}
+                alt={room.name}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute bottom-0 right-0 bg-stone-900 text-white px-4 py-2 text-lg font-serif">
-                {room.price}€ <span className="text-xs font-sans text-stone-300">/ noche</span>
+                Desde {room.price}€ <span className="text-xs font-sans text-stone-300">/ noche</span>
               </div>
             </div>
-            
+
             <div className="p-6 flex-1 flex flex-col">
               <h3 className="text-xl font-serif font-bold text-stone-800 mb-2">{room.name}</h3>
               <p className="text-stone-600 text-sm mb-4 line-clamp-3">{room.description}</p>
-              
+
               <div className="mt-auto">
                 <ul className="grid grid-cols-2 gap-y-2 gap-x-1 mb-6">
                   {room.features.slice(0, 4).map((feature, idx) => (
@@ -45,23 +45,23 @@ export const RoomList: React.FC<RoomListProps> = ({ onSelectRoom }) => {
                     </li>
                   ))}
                 </ul>
-                
+
                 <div className="flex flex-col gap-3">
-                    <button 
-                      onClick={() => onSelectRoom(room)}
-                      className="w-full py-3 border-2 border-stone-800 bg-stone-800 text-white font-medium text-sm tracking-wide uppercase hover:bg-stone-900 transition-colors"
-                    >
-                      Solicitar Reserva Directa
-                    </button>
-                    <a 
-                      href={BOOKING_URL} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="w-full py-2 text-center text-xs text-stone-500 hover:text-wood-600 flex items-center justify-center gap-1 transition-colors"
-                    >
-                      <span>Ver disponibilidad en Booking.com</span>
-                      <ExternalLink size={12} />
-                    </a>
+                  <button
+                    onClick={() => onSelectRoom(room)}
+                    className="w-full py-3 border-2 border-stone-800 bg-stone-800 text-white font-medium text-sm tracking-wide uppercase hover:bg-stone-900 transition-colors"
+                  >
+                    Solicitar Reserva Directa
+                  </button>
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2 text-center text-xs text-stone-500 hover:text-wood-600 flex items-center justify-center gap-1 transition-colors"
+                  >
+                    <span>Ver disponibilidad en Booking.com</span>
+                    <ExternalLink size={12} />
+                  </a>
                 </div>
               </div>
             </div>

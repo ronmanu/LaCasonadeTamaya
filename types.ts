@@ -1,3 +1,6 @@
+/**
+ * Represeents a hotel room and its details.
+ */
 export interface Room {
   id: string;
   name: string;
@@ -6,8 +9,15 @@ export interface Room {
   capacity: number;
   image: string;
   features: string[];
+  /** Optional URL for booking on an external PMS like AvaiBook or Booking.com */
+  externalBookingUrl?: string;
+  /** Link for online check-in portal when available */
+  checkInUrl?: string;
 }
 
+/**
+ * Represents a local activity or tourist attraction.
+ */
 export interface Activity {
   id: string;
   title: string;
@@ -16,6 +26,9 @@ export interface Activity {
   icon: 'mountain' | 'mushroom' | 'history' | 'food';
 }
 
+/**
+ * Detailed information for any section about the local environment.
+ */
 export interface EnvironmentSection {
   id: string;
   title: string;
@@ -25,6 +38,9 @@ export interface EnvironmentSection {
   details?: { label: string; value: string }[];
 }
 
+/**
+ * Form data for a direct booking request via the website.
+ */
 export interface BookingRequest {
   roomId: string;
   checkIn: string;
@@ -47,11 +63,15 @@ export interface MenuCategory {
   items: MenuItem[];
 }
 
+/**
+ * Navigation state for the application.
+ */
 export enum PageState {
   HOME,
   ROOMS,
   RESTAURANT,
   ACTIVITIES,
   GALLERY,
-  CONTACT
+  CONTACT,
+  STAFF
 }
