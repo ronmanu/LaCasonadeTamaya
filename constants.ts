@@ -328,13 +328,14 @@ export const GALLERY_IMAGES = [
   { src: "/images/habitacion_10.webp", category: "Habitaciones", caption: "Habitación 10 - Doble Rústica \"Botánica\"" },
   { src: "/images/habitacion_11.webp", category: "Habitaciones", caption: "Habitación 11 - Familiar \"La Casona\"" },
 
-  // Jardín y Exteriores - Fotos reales
+  // Jardín - Fotos reales
   { src: "/images/jardin_rosas.webp", category: "Jardín", caption: "Jardín de rosas de La Casona" },
-  { src: "/images/ext_galeria_1.webp", category: "Exteriores", caption: "Vistas exteriores del hotel" },
-  { src: "/images/ext_galeria_2.webp", category: "Exteriores", caption: "Entorno natural de La Casona" },
-  { src: "/images/ext_galeria_3.webp", category: "Exteriores", caption: "Fachada y jardines" },
-  { src: "/images/ext_galeria_4.webp", category: "Exteriores", caption: "Terraza y exteriores" },
-  { src: "/images/ext_galeria_5.webp", category: "Exteriores", caption: "Espacios al aire libre" },
+  { src: "/images/ext_galeria_1.webp", category: "Jardín", caption: "Vistas del jardín de La Casona" },
+  { src: "/images/ext_galeria_2.webp", category: "Jardín", caption: "Rincones del jardín" },
+  { src: "/images/ext_galeria_3.webp", category: "Jardín", caption: "Fachada desde el jardín" },
+  { src: "/images/ext_galeria_4.webp", category: "Jardín", caption: "Terraza del jardín" },
+  { src: "/images/ext_galeria_5.webp", category: "Jardín", caption: "Espacios exteriores ajardinados" },
+  { src: "/images/terraza_atardecer.webp", category: "Jardín", caption: "Atardecer en la terraza del jardín" },
 
   // Restaurante e Interiores - Fotos reales
   { src: "/images/barra_bar.webp", category: "Restaurante", caption: "Barra del bar con encanto rústico" },
@@ -354,7 +355,19 @@ export const GALLERY_IMAGES = [
   { src: "/images/ermita_nieve.webp", category: "Invierno", caption: "Ermita de los Enebrales en invierno" },
 
   // Entorno
-  { src: "/images/terraza_atardecer.webp", category: "Exteriores", caption: "Atardecer en la terraza" },
   { src: "/images/tamajon_iglesia.webp", category: "Exteriores", caption: "Iglesia de la Asunción de Tamajón" },
-  { src: "/images/ermita.webp", category: "Exteriores", caption: "Ermita de los Enebrales" }
+  { src: "/images/ermita.webp", category: "Exteriores", caption: "Ermita de los Enebrales" },
+  { src: "/images/Alojamiento-rural-El-Carabo-en-Valverde-de-los-Arroyos-Ruta-de-los-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Arquitectura tradicional en Valverde de los Arroyos" },
+  { src: "/images/arquitectura_negra.webp", category: "Exteriores", caption: "Detalle de arquitectura negra" },
+  { src: "/images/Camino-a-la-Chorrera-en-Valverde-de-los-Arroyos-en-Ruta-de-los-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Camino a la Chorrera de Despeñalagua" },
+  { src: "/images/Campillejo-Ruta-de-los-pueblos-negros-de-Guadalajra-min.webp", category: "Exteriores", caption: "Pueblo de Campillejo" },
+  { src: "/images/Cesta-floral-con-el-contraste-de-la-pizarra-negra-Ruta-de-los-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Contrastes cromáticos en la pizarra" },
+  { src: "/images/cipat-tamajon.jpg.webp", category: "Exteriores", caption: "CIPAT Tamajón" },
+  { src: "/images/Hayedo-de-Tejera-Negra-Ruta-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Hayedo de Tejera Negra" },
+  { src: "/images/iglesia-asuncion-tamajon.jpg.webp", category: "Exteriores", caption: "Iglesia de la Asunción" },
+  { src: "/images/Iglesia-de-Campillejo-Ruta-de-los-pueblos-negros-de-Guadalajra-min.webp", category: "Exteriores", caption: "Iglesia de Campillejo" },
+  { src: "/images/palacio-mendoza-tamajon.jpg.webp", category: "Exteriores", caption: "Palacio de los Mendoza, Tamajón" },
+  { src: "/images/Plaza-Central-de-Majaelrayo-Ruta-de-los-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Plaza de Majaelrayo" },
+  { src: "/images/Plaza-central-de-Valverde-de-los-Arroyos-Ruta-de-los-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Plaza de Valverde de los Arroyos" },
+  { src: "/images/Plaza-del-reloj-solar-de-Campillo-de-Ranas-Ruta-de-los-pueblos-negros-de-Guadalajara-min.webp", category: "Exteriores", caption: "Plaza del Reloj Solar, Campillo de Ranas" }
 ];
