@@ -55,9 +55,12 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
     const [loginError, setLoginError] = useState('');
 
     const [cleaningStatus, setCleaningStatus] = useState<Record<string, 'clean' | 'dirty' | 'in-progress'>>({});
+    const [roomDetails, setRoomDetails] = useState<Record<string, { is_occupied: boolean, price_per_night: number }>>({});
     const [charges, setCharges] = useState<Charge[]>([]);
     const [newCharge, setNewCharge] = useState({ room: '', concept: '', quantity: '1', unitPrice: '' });
     const [selectedRoom, setSelectedRoom] = useState<string>('');
+    const [isEditingPrice, setIsEditingPrice] = useState<string | null>(null);
+    const [tempPrice, setTempPrice] = useState<string>('');
 
     // Checkout confirmation state: 0=idle, 1=first confirm, 2=second confirm, 3=type confirm
     const [checkoutStep, setCheckoutStep] = useState<0 | 1 | 2 | 3>(0);
@@ -93,6 +96,19 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
             cleaningData.forEach(item => { statusMap[item.room_id] = item.status; });
             setCleaningStatus(statusMap);
         }
+
+        const { data: detailsData, error: detailsErr } = await supabase.from('room_details').select('*');
+        if (detailsErr) console.error('Error fetching room details:', detailsErr);
+        if (detailsData) {
+            const detailsMap: Record<string, { is_occupied: boolean, price_per_night: number }> = {};
+            detailsData.forEach(item => {
+                detailsMap[item.room_id] = {
+                    is_occupied: item.is_occupied,
+                    price_per_night: Number(item.price_per_night)
+                };
+            });
+            setRoomDetails(detailsMap);
+        }
     };
 
     useEffect(() => {
@@ -103,6 +119,7 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
             .channel('staff-db-changes')
             .on('postgres_changes', { event: '*', table: 'room_charges' }, fetchData)
             .on('postgres_changes', { event: '*', table: 'cleaning_status' }, fetchData)
+            .on('postgres_changes', { event: '*', table: 'room_details' }, fetchData)
             .subscribe();
 
         return () => { supabase.removeChannel(channel); };
@@ -120,6 +137,33 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
         setCleaningStatus({ ...cleaningStatus, [roomId]: next });
         const { error } = await supabase.from('cleaning_status').upsert({ room_id: roomId, status: next }, { onConflict: 'room_id' });
         if (error) alert('Error limpieza: ' + error.message);
+    };
+
+    const toggleOccupancy = async (roomId: string) => {
+        const current = roomDetails[roomId]?.is_occupied || false;
+        const next = !current;
+        setRoomDetails(prev => ({
+            ...prev,
+            [roomId]: { ...prev[roomId], is_occupied: next }
+        }));
+        const { error } = await supabase.from('room_details').upsert({
+            room_id: roomId,
+            is_occupied: next
+        }, { onConflict: 'room_id' });
+        if (error) alert('Error ocupación: ' + error.message);
+    };
+
+    const updateRoomPrice = async (roomId: string, newPrice: number) => {
+        setRoomDetails(prev => ({
+            ...prev,
+            [roomId]: { ...prev[roomId], price_per_night: newPrice }
+        }));
+        const { error } = await supabase.from('room_details').upsert({
+            room_id: roomId,
+            price_per_night: newPrice
+        }, { onConflict: 'room_id' });
+        if (error) alert('Error precio: ' + error.message);
+        setIsEditingPrice(null);
     };
 
     const handleProductSelect = (productName: string) => {
@@ -252,35 +296,98 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                         <h2 className="font-serif font-bold text-stone-800">Estado de Habitaciones</h2>
                         <p className="text-xs text-stone-400 mt-0.5">Pulsa para cambiar estado</p>
                     </div>
-                    <div className="grid grid-cols-2 gap-2 p-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-4">
                         {ROOMS.map(room => {
                             const num = room.name.split(' ')[1];
-                            const status = cleaningStatus[room.id] || 'dirty';
-                            const colors = {
+                            const cStatus = cleaningStatus[room.id] || 'dirty';
+                            const rDetails = roomDetails[room.id] || { is_occupied: false, price_per_night: 0 };
+
+                            const cColors = {
                                 clean: 'bg-green-50 border-green-200 text-green-700',
                                 'in-progress': 'bg-blue-50 border-blue-200 text-blue-700',
                                 dirty: 'bg-red-50 border-red-200 text-red-700',
                             };
-                            const badgeColors = {
+                            const cBadgeColors = {
                                 clean: 'bg-green-600',
                                 'in-progress': 'bg-blue-600',
                                 dirty: 'bg-red-600',
                             };
-                            const labels = { clean: 'Limpia', 'in-progress': 'Limpiando', dirty: 'Sucia' };
+                            const cLabels = { clean: 'Limpia', 'in-progress': 'Limpiando', dirty: 'Sucia' };
+
                             return (
-                                <button
-                                    key={room.id}
-                                    onClick={() => toggleCleaning(room.id)}
-                                    title={`Cambiar estado: ${room.name}`}
-                                    aria-label={`Habitación ${num}: ${labels[status]}`}
-                                    className={`cursor-pointer p-3 rounded-xl border flex items-center gap-3 transition-all text-left ${colors[status]}`}
-                                >
-                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0 ${badgeColors[status]}`}>{num}</div>
-                                    <div>
-                                        <p className="text-[9px] text-stone-400 uppercase font-bold leading-none mb-0.5">{room.name.split('- ')[1]?.substring(0, 14)}</p>
-                                        <p className={`text-[10px] font-bold uppercase ${colors[status].split(' ')[2]}`}>{labels[status]}</p>
+                                <div key={room.id} className="p-3 bg-stone-50 border border-stone-200 rounded-xl space-y-3">
+                                    <div className="flex justify-between items-start">
+                                        <div className="flex gap-2">
+                                            <div className="w-8 h-8 rounded-lg bg-stone-900 flex items-center justify-center text-white text-xs font-bold shrink-0">{num}</div>
+                                            <div>
+                                                <p className="text-[10px] text-stone-900 font-bold uppercase">{room.name.split('- ')[1]}</p>
+                                                <div className="flex items-center gap-1.5 mt-1">
+                                                    {isEditingPrice === room.id ? (
+                                                        <div className="flex items-center gap-1">
+                                                            <input
+                                                                type="number"
+                                                                value={tempPrice}
+                                                                onChange={e => setTempPrice(e.target.value)}
+                                                                className="w-14 text-[10px] font-bold border rounded px-1 py-0.5 outline-none"
+                                                                autoFocus
+                                                            />
+                                                            <button
+                                                                onClick={() => updateRoomPrice(room.id, parseFloat(tempPrice))}
+                                                                className="text-green-600 hover:text-green-700"
+                                                                title="Guardar"
+                                                            >
+                                                                <ShieldCheck size={12} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => setIsEditingPrice(null)}
+                                                                className="text-stone-400"
+                                                                title="Cancelar"
+                                                            >
+                                                                <X size={12} />
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            onClick={() => {
+                                                                setIsEditingPrice(room.id);
+                                                                setTempPrice(rDetails.price_per_night.toString());
+                                                            }}
+                                                            className="text-[10px] font-bold text-stone-400 hover:text-stone-600 transition-colors flex items-center gap-1"
+                                                            title="Editar precio por noche"
+                                                        >
+                                                            {rDetails.price_per_night.toFixed(2)}€/noche
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </button>
+
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {/* Limpieza */}
+                                        <button
+                                            onClick={() => toggleCleaning(room.id)}
+                                            className={`flex flex-col p-2 rounded-lg border text-left transition-all ${cColors[cStatus]}`}
+                                        >
+                                            <span className="text-[8px] uppercase font-bold opacity-60">Limpieza</span>
+                                            <span className="text-[10px] font-black uppercase">{cLabels[cStatus]}</span>
+                                        </button>
+
+                                        {/* Ocupación */}
+                                        <button
+                                            onClick={() => toggleOccupancy(room.id)}
+                                            className={`flex flex-col p-2 rounded-lg border text-left transition-all ${rDetails.is_occupied
+                                                    ? 'bg-amber-50 border-amber-200 text-amber-700'
+                                                    : 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                                                }`}
+                                        >
+                                            <span className="text-[8px] uppercase font-bold opacity-60">Ocupación</span>
+                                            <span className="text-[10px] font-black uppercase">
+                                                {rDetails.is_occupied ? 'Ocupada' : 'Libre'}
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
                             );
                         })}
                     </div>
