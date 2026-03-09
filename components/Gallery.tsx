@@ -25,7 +25,7 @@ export const Gallery: React.FC = () => {
   return (
     <div className="min-h-screen bg-stone-50">
       <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
-        <img src="/images/galeria_bg.jpg" className="absolute inset-0 w-full h-full object-cover object-bottom" alt="Galería" />
+        <img src="/images/ext_galeria_5.webp" className="absolute inset-0 w-full h-full object-cover object-bottom" alt="Galería" />
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 text-white text-center px-4">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Galería Fotográfica</h1>
@@ -82,6 +82,7 @@ export const Gallery: React.FC = () => {
           <button
             onClick={closeLightbox}
             className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            aria-label="Cerrar galería"
           >
             <X size={32} />
           </button>
