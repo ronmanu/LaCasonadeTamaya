@@ -346,10 +346,15 @@ export const GALLERY_IMAGES = [
   { src: "/images/pasillo.webp", category: "Interiores", caption: "Pasillo con vigas de madera" },
   { src: "/images/cuarto_estar.webp", category: "Interiores", caption: "Cuarto de estar" },
 
-  // Invierno
+  // Invierno - Fotos Reales
   { src: "/images/casona_nieve.webp", category: "Invierno", caption: "La Casona bajo la nieve" },
   { src: "/images/tamajon_invierno.webp", category: "Invierno", caption: "Tamajón en invierno" },
+  { src: "/images/tamajon_iglesia_nieve.webp", category: "Invierno", caption: "Iglesia de Tamajón nevada" },
+  { src: "/images/paisaje_nevado.webp", category: "Invierno", caption: "Paisaje nevado en los alrededores" },
+  { src: "/images/ermita_nieve.webp", category: "Invierno", caption: "Ermita de los Enebrales en invierno" },
 
   // Entorno
-  { src: "/images/terraza_atardecer.webp", category: "Exteriores", caption: "Atardecer en la terraza" }
+  { src: "/images/terraza_atardecer.webp", category: "Exteriores", caption: "Atardecer en la terraza" },
+  { src: "/images/tamajon_iglesia.webp", category: "Exteriores", caption: "Iglesia de la Asunción de Tamajón" },
+  { src: "/images/ermita.webp", category: "Exteriores", caption: "Ermita de los Enebrales" }
 ];
