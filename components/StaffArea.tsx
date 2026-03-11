@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, LogOut, ShieldCheck, Trash2, Plus, Coffee, X, LogIn } from 'lucide-react';
+import { Lock, LogOut, ShieldCheck, Trash2, Plus, Coffee, X, LogIn, MessageSquare, AlertCircle, Save } from 'lucide-react';
 import { ROOMS } from '../constants';
 import { supabase } from '../supabase';
 
@@ -55,12 +55,14 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
     const [loginError, setLoginError] = useState('');
 
     const [cleaningStatus, setCleaningStatus] = useState<Record<string, 'clean' | 'dirty' | 'in-progress'>>({});
-    const [roomDetails, setRoomDetails] = useState<Record<string, { is_occupied: boolean, price_per_night: number }>>({});
+    const [roomDetails, setRoomDetails] = useState<Record<string, { is_occupied: boolean, price_per_night: number, notes: string }>>({});
     const [charges, setCharges] = useState<Charge[]>([]);
     const [newCharge, setNewCharge] = useState({ room: '', concept: '', quantity: '1', unitPrice: '' });
     const [selectedRoom, setSelectedRoom] = useState<string>('');
     const [isEditingPrice, setIsEditingPrice] = useState<string | null>(null);
     const [tempPrice, setTempPrice] = useState<string>('');
+    const [isEditingNotes, setIsEditingNotes] = useState<string | null>(null);
+    const [tempNotes, setTempNotes] = useState<string>('');
 
     // Checkout confirmation state: 0=idle, 1=first confirm, 2=second confirm, 3=type confirm
     const [checkoutStep, setCheckoutStep] = useState<0 | 1 | 2 | 3>(0);
@@ -100,11 +102,12 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
         const { data: detailsData, error: detailsErr } = await supabase.from('room_details').select('*');
         if (detailsErr) console.error('Error fetching room details:', detailsErr);
         if (detailsData) {
-            const detailsMap: Record<string, { is_occupied: boolean, price_per_night: number }> = {};
+            const detailsMap: Record<string, { is_occupied: boolean, price_per_night: number, notes: string }> = {};
             detailsData.forEach(item => {
                 detailsMap[item.room_id] = {
                     is_occupied: item.is_occupied,
-                    price_per_night: Number(item.price_per_night)
+                    price_per_night: Number(item.price_per_night),
+                    notes: item.notes || ''
                 };
             });
             setRoomDetails(detailsMap);
@@ -140,7 +143,7 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
     };
 
     const toggleOccupancy = async (roomId: string) => {
-        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0 };
+        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0, notes: '' };
         const next = !existing.is_occupied;
 
         setRoomDetails(prev => ({
@@ -160,7 +163,7 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
     };
 
     const updateRoomPrice = async (roomId: string, newPrice: number) => {
-        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0 };
+        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0, notes: '' };
 
         setRoomDetails(prev => ({
             ...prev,
@@ -177,6 +180,26 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
             fetchData(); // Rollback/Sync
         }
         setIsEditingPrice(null);
+    };
+
+    const updateRoomNotes = async (roomId: string, newNotes: string) => {
+        const existing = roomDetails[roomId] || { is_occupied: false, price_per_night: 0, notes: '' };
+
+        setRoomDetails(prev => ({
+            ...prev,
+            [roomId]: { ...existing, notes: newNotes }
+        }));
+
+        const { error } = await supabase.from('room_details').upsert({
+            room_id: roomId,
+            notes: newNotes
+        }, { onConflict: 'room_id' });
+
+        if (error) {
+            console.error('Error notas:', error);
+            fetchData(); // Rollback/Sync
+        }
+        setIsEditingNotes(null);
     };
 
     const handleProductSelect = (productName: string) => {
@@ -313,7 +336,7 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                         {ROOMS.map(room => {
                             const num = room.name.split(' ')[1];
                             const cStatus = cleaningStatus[room.id] || 'dirty';
-                            const rDetails = roomDetails[room.id] || { is_occupied: false, price_per_night: 0 };
+                            const rDetails = roomDetails[room.id] || { is_occupied: false, price_per_night: 0, notes: '' };
 
                             const cColors = {
                                 clean: 'bg-green-50 border-green-200 text-green-700',
@@ -399,6 +422,58 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                                                 {rDetails.is_occupied ? 'Ocupada' : 'Libre'}
                                             </span>
                                         </button>
+                                    </div>
+
+                                    {/* Notas / Incidencias */}
+                                    <div className="pt-2 border-t border-stone-100">
+                                        {isEditingNotes === room.id ? (
+                                            <div className="space-y-2">
+                                                <textarea
+                                                    value={tempNotes}
+                                                    onChange={e => setTempNotes(e.target.value)}
+                                                    className="w-full text-[10px] p-2 border rounded-lg outline-none bg-white min-h-[60px]"
+                                                    placeholder="Averías, preferencias, avisos..."
+                                                    autoFocus
+                                                />
+                                                <div className="flex justify-end gap-2">
+                                                    <button
+                                                        onClick={() => setIsEditingNotes(null)}
+                                                        className="px-2 py-1 text-[9px] font-bold text-stone-400 hover:text-stone-600"
+                                                    >
+                                                        Cancelar
+                                                    </button>
+                                                    <button
+                                                        onClick={() => updateRoomNotes(room.id, tempNotes)}
+                                                        className="flex items-center gap-1 px-2 py-1 text-[9px] font-bold bg-stone-900 text-white rounded-md"
+                                                    >
+                                                        <Save size={10} /> Guardar Nota
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                onClick={() => {
+                                                    setIsEditingNotes(room.id);
+                                                    setTempNotes(rDetails.notes || '');
+                                                }}
+                                                className={`w-full flex items-start gap-2 p-2 rounded-lg transition-colors text-left ${rDetails.notes
+                                                        ? 'bg-stone-100 border border-stone-200'
+                                                        : 'hover:bg-stone-100 border border-transparent border-dashed hover:border-stone-200'
+                                                    }`}
+                                            >
+                                                <MessageSquare size={14} className={rDetails.notes ? 'text-stone-900 mt-0.5' : 'text-stone-300 mt-0.5'} />
+                                                <div className="min-w-0 flex-1">
+                                                    <p className={`text-[9px] font-bold uppercase ${rDetails.notes ? 'text-stone-900' : 'text-stone-400'}`}>
+                                                        {rDetails.notes ? 'Aviso / Incidencia' : 'Añadir nota o avería'}
+                                                    </p>
+                                                    {rDetails.notes && (
+                                                        <p className="text-[10px] text-stone-600 line-clamp-2 mt-0.5 leading-tight">
+                                                            {rDetails.notes}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             );
