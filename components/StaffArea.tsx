@@ -19,7 +19,7 @@ interface Charge {
     dateLabel: string;
 }
 
-const STAFF_PASSWORD = 'tamaya2026';
+// Authentication is now handled by Supabase Auth (no hardcoded passwords)
 
 const BAR_PRODUCTS = [
     { name: 'Café', price: 1.50 },
@@ -51,8 +51,11 @@ const formatDateLabel = (isoString: string): string => {
 
 export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
+    const [userEmail, setUserEmail] = useState('');
 
     const [cleaningStatus, setCleaningStatus] = useState<Record<string, 'clean' | 'dirty' | 'in-progress'>>({});
     const [roomDetails, setRoomDetails] = useState<Record<string, { is_occupied: boolean, price_per_night: number, notes: string }>>({});
@@ -114,6 +117,28 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
         }
     };
 
+    // Check if user is already logged in on mount
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                setIsAuthenticated(true);
+                setUserEmail(session.user.email || '');
+            }
+        });
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                setIsAuthenticated(true);
+                setUserEmail(session.user.email || '');
+            } else {
+                setIsAuthenticated(false);
+                setUserEmail('');
+            }
+        });
+
+        return () => { subscription.unsubscribe(); };
+    }, []);
+
     useEffect(() => {
         if (!isAuthenticated) return;
         fetchData();
@@ -128,10 +153,35 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
         return () => { supabase.removeChannel(channel); };
     }, [isAuthenticated]);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === STAFF_PASSWORD) { setIsAuthenticated(true); setLoginError(''); }
-        else { setLoginError('Contraseña incorrecta'); setPassword(''); }
+        setIsLoggingIn(true);
+        setLoginError('');
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+            if (error) {
+                setLoginError(error.message === 'Invalid login credentials' ? 'Email o contraseña incorrectos' : error.message);
+                setPassword('');
+            } else if (data.session) {
+                setIsAuthenticated(true);
+                setUserEmail(data.session.user.email || '');
+            }
+        } catch (err) {
+            setLoginError('Error de conexión. Inténtalo de nuevo.');
+        } finally {
+            setIsLoggingIn(false);
+        }
+    };
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        setIsAuthenticated(false);
+        setEmail('');
+        setPassword('');
+        onLogout();
     };
 
     const toggleCleaning = async (roomId: string) => {
@@ -288,16 +338,30 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                     </div>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <input
+                            type="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl outline-none focus:border-stone-900 transition-colors"
+                            placeholder="Email del equipo"
+                            autoComplete="email"
+                            required
+                        />
+                        <input
                             type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                             className="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl outline-none focus:border-stone-900 transition-colors"
-                            placeholder="Contraseña staff"
+                            placeholder="Contraseña"
+                            autoComplete="current-password"
                             required
                         />
                         {loginError && <p className="text-red-500 text-xs text-center">{loginError}</p>}
-                        <button type="submit" className="w-full bg-stone-900 text-white py-4 rounded-xl font-bold hover:bg-stone-800 transition-all shadow-lg">
-                            Entrar
+                        <button 
+                            type="submit" 
+                            className="w-full bg-stone-900 text-white py-4 rounded-xl font-bold hover:bg-stone-800 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled={isLoggingIn}
+                        >
+                            {isLoggingIn ? 'Verificando...' : 'Entrar'}
                         </button>
                     </form>
                 </div>
@@ -321,14 +385,17 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                         <ShieldCheck size={18} className="text-green-600" />
                         <span className="text-sm font-bold uppercase tracking-widest text-stone-500">Equipo Tamaya</span>
                     </div>
-                    <button
-                        onClick={onLogout}
-                        className="flex items-center gap-2 text-stone-400 hover:text-red-600 text-sm font-medium transition-colors"
-                        title="Cerrar sesión"
-                        aria-label="Cerrar sesión"
-                    >
-                        <LogOut size={16} /> Salir
-                    </button>
+                    <div className="flex items-center gap-4">
+                        {userEmail && <span className="text-xs text-stone-400 hidden sm:block">{userEmail}</span>}
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-2 text-stone-400 hover:text-red-600 text-sm font-medium transition-colors"
+                            title="Cerrar sesión"
+                            aria-label="Cerrar sesión"
+                        >
+                            <LogOut size={16} /> Salir
+                        </button>
+                    </div>
                 </div>
             </header>
 

@@ -34,7 +34,7 @@ export const Footer: React.FC<FooterProps> = ({ setPage }) => {
             </li>
             <li className="flex items-center gap-3">
               <Mail className="text-wood-400" size={18} />
-              <a href="mailto:info@casonatamaya.com" className="text-sm hover:text-white transition">info@casonatamaya.com</a>
+              <a href="mailto:info@lacasonadetamaya.es" className="text-sm hover:text-white transition">info@lacasonadetamaya.es</a>
             </li>
           </ul>
         </div>
