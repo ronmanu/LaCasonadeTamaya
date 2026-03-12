@@ -17,6 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({ setPage, currentPage }) => {
     { label: 'Galería', value: PageState.GALLERY },
     { label: 'Entorno', value: PageState.ACTIVITIES },
     { label: 'Contacto', value: PageState.CONTACT },
+    { label: 'Guía', value: PageState.GUEST_PORTAL },
   ];
 
   const handleNav = (value: PageState) => {

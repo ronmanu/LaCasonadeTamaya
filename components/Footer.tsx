@@ -56,15 +56,15 @@ export const Footer: React.FC<FooterProps> = ({ setPage }) => {
       </div>
 
       <div className="border-t border-stone-800 pt-8 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse justify-between items-center gap-4 text-center">
           <p className="text-stone-600">&copy; {new Date().getFullYear()} Hotel Rural La Casona de Tamaya. Todos los derechos reservados.</p>
           <button
             onClick={() => setPage(PageState.STAFF)}
-            className="flex items-center gap-1.5 text-stone-500 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-stone-400 hover:text-white transition-colors py-2 px-3 bg-stone-800/50 rounded-lg"
             title="Acceso Administración"
           >
-            <ShieldCheck size={14} />
-            <span>Staff</span>
+            <ShieldCheck size={14} className="text-wood-400" />
+            <span className="font-bold tracking-wider text-[10px] uppercase">Acceso Staff</span>
           </button>
         </div>
       </div>

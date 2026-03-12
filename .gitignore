@@ -25,3 +25,8 @@ dist-ssr
 
 # Raw Source Photos
 Fotos Hotel/
+
+# Environment
+.env
+.env.*
+.env.local

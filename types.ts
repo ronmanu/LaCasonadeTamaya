@@ -36,6 +36,9 @@ export interface EnvironmentSection {
   content: string[];
   image: string;
   details?: { label: string; value: string }[];
+  category?: 'nature' | 'culture' | 'gastronomy' | 'adventure';
+  isRecommended?: boolean;
+  duration?: string;
 }
 
 /**
@@ -73,5 +76,6 @@ export enum PageState {
   ACTIVITIES,
   GALLERY,
   CONTACT,
-  STAFF
+  STAFF,
+  GUEST_PORTAL
 }

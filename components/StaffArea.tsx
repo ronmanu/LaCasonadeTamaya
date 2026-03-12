@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, LogOut, ShieldCheck, Trash2, Plus, Coffee, X, LogIn, MessageSquare, AlertCircle, Save } from 'lucide-react';
+import { Lock, LogOut, ShieldCheck, Trash2, Plus, Coffee, X, LogIn, MessageSquare, AlertCircle, Save, Users, CreditCard } from 'lucide-react';
 import { ROOMS } from '../constants';
 import { supabase } from '../supabase';
 
@@ -305,13 +305,21 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
         );
     }
 
+    // Estadísticas para el resumen
+    const summary = {
+        occupied: Object.values(roomDetails).filter(r => r.is_occupied).length,
+        dirty: Object.entries(cleaningStatus).filter(([id, status]) => status === 'dirty').length,
+        incidents: Object.values(roomDetails).filter(r => r.notes && r.notes.trim() !== '').length,
+        totalRevenue: Object.values(roomDetails).reduce((acc, r) => acc + (r.is_occupied ? (r.price_per_night || 0) : 0), 0)
+    };
+
     return (
-        <div className="min-h-screen pt-20 bg-stone-50 font-sans">
-            <header className="bg-white border-b border-stone-200 py-4 px-4 mb-6">
+        <div className="min-h-screen bg-stone-50 font-sans">
+            <header className="bg-white border-b border-stone-200 py-4 px-4 sticky top-0 z-30 shadow-sm">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <ShieldCheck size={18} className="text-green-600" />
-                        <span className="text-sm font-bold uppercase tracking-widest text-stone-500">Panel de Control</span>
+                        <span className="text-sm font-bold uppercase tracking-widest text-stone-500">Equipo Tamaya</span>
                     </div>
                     <button
                         onClick={onLogout}
@@ -324,7 +332,43 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                 </div>
             </header>
 
-            <main className="max-w-7xl mx-auto px-4 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* ── RESUMEN DEL DÍA ─────────────────────────────────── */}
+            <div className="max-w-7xl mx-auto px-4 mt-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                        <div className="flex items-center gap-2 text-stone-400 mb-1">
+                            <Users size={14} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter">Ocupación</span>
+                        </div>
+                        <p className="text-2xl font-serif font-bold text-stone-800">{summary.occupied} <span className="text-sm font-sans font-normal text-stone-400">/ {ROOMS.length}</span></p>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                        <div className="flex items-center gap-2 text-stone-400 mb-1">
+                            <Trash2 size={14} className={summary.dirty > 0 ? "text-red-500" : "text-green-500"} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter">Limpieza</span>
+                        </div>
+                        <p className={`text-2xl font-serif font-bold ${summary.dirty > 0 ? "text-stone-800" : "text-green-600"}`}>
+                            {summary.dirty} <span className="text-sm font-sans font-normal text-stone-400">{summary.dirty === 1 ? 'sucia' : 'sucias'}</span>
+                        </p>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm">
+                        <div className="flex items-center gap-2 text-stone-400 mb-1">
+                            <AlertCircle size={14} className={summary.incidents > 0 ? "text-amber-500" : "text-stone-300"} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter">Incidencias</span>
+                        </div>
+                        <p className="text-2xl font-serif font-bold text-stone-800">{summary.incidents}</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl border border-emerald-100 shadow-sm">
+                        <div className="flex items-center gap-2 text-emerald-600/50 mb-1">
+                            <CreditCard size={14} />
+                            <span className="text-[10px] font-bold uppercase tracking-tighter text-stone-400">Caja Proyectada</span>
+                        </div>
+                        <p className="text-2xl font-serif font-bold text-emerald-700">{summary.totalRevenue.toFixed(0)}€</p>
+                    </div>
+                </div>
+            </div>
+
+            <main className="max-w-7xl mx-auto px-4 mt-6 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 {/* ── LIMPIEZA ─────────────────────────────────────── */}
                 <section className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden h-fit">
@@ -457,8 +501,8 @@ export const StaffArea: React.FC<StaffAreaProps> = ({ onLogout }) => {
                                                     setTempNotes(rDetails.notes || '');
                                                 }}
                                                 className={`w-full flex items-start gap-2 p-2 rounded-lg transition-colors text-left ${rDetails.notes
-                                                        ? 'bg-stone-100 border border-stone-200'
-                                                        : 'hover:bg-stone-100 border border-transparent border-dashed hover:border-stone-200'
+                                                    ? 'bg-stone-100 border border-stone-200'
+                                                    : 'hover:bg-stone-100 border border-transparent border-dashed hover:border-stone-200'
                                                     }`}
                                             >
                                                 <MessageSquare size={14} className={rDetails.notes ? 'text-stone-900 mt-0.5' : 'text-stone-300 mt-0.5'} />

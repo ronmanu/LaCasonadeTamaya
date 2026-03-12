@@ -10,7 +10,7 @@ export const HOTEL_CONDITIONS = {
   checkIn: "14:00 - 15:00",
   checkOut: "12:00 - 13:00",
   minAge: 18,
-  pets: "No se admiten",
+  pets: "Sí se aceptan",
   smoking: "Prohibido fumar en todo el establecimiento",
   parking: "Privado y Gratuito (no es necesario reservar)",
   accessibility: "Acceso a pisos superiores solo mediante escaleras"
@@ -159,10 +159,12 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     id: 'tamajon-pueblo',
     title: 'Tamajón: Historia y Piedra',
     subtitle: 'La Pequeña Ciudad Encantada',
-    image: '/images/tamajon_ciudad_encantada.webp', // Foto local de la Ciudad Encantada de Tamajón
+    image: '/images/tamajon_ciudad_encantada.webp',
+    category: 'culture',
+    duration: '1-2 horas',
     content: [
-      "Tamajón no es solo un punto de paso, es un destino en sí mismo. Al norte del pueblo, la naturaleza ha esculpido durante milenios lo que conocemos como la 'Ciudad Encantada'. Un paisaje kárstico donde la piedra caliza cobra vida formando arcos, cuevas y figuras caprichosas entre sabinas centenarias. Es un paseo imprescindible y sencillo, perfecto para perderse y conectar con la quietud de 2026.",
-      "Dentro del casco urbano, la historia nos habla a través de la Iglesia de la Asunción, cuyos orígenes románicos del siglo XIII se entrelazan con una magnífica arquitectura renacentista. La luz de la Sierra Norte baña sus muros de piedra dorada, creando un contraste único con las cubiertas de pizarra que anuncian la cercanía de los Pueblos Negros."
+      "Tamajón no es solo un punto de paso, es un destino en sí mismo. Al norte del pueblo, la naturaleza ha esculpido durante milenios lo que conocemos como la 'Ciudad Encantada'. Un paisaje kárstico donde la piedra caliza cobra vida formando arcos, cuevas y figuras caprichosas entre sabinas centenarias.",
+      "Dentro del casco urbano, la historia nos habla a través de la Iglesia de la Asunción, cuyos orígenes románicos del siglo XIII se entrelazan con una magnífica arquitectura renacentista. La luz de la Sierra Norte baña sus muros de piedra dorada, creando un contraste único."
     ],
     details: [
       { label: 'Imprescindible', value: 'Ermita de los Enebrales' },
@@ -171,46 +173,72 @@ export const ENVIRONMENT_INFO: EnvironmentSection[] = [
     ]
   },
   {
-    id: 'arquitectura-negra',
-    title: 'La Ruta de la Arquitectura Negra',
-    subtitle: 'El alma de pizarra de Guadalajara',
-    image: '/images/pueblo_negro.webp', // Foto local de la Ruta de la Arquitectura Negra
+    id: 'ermita-atardecer',
+    title: 'Nuestro Rincón Favorito',
+    subtitle: 'Atardecer en la Ermita',
+    image: '/images/ermita.webp',
+    category: 'nature',
+    isRecommended: true,
+    duration: '45 min',
     content: [
-      "Desde La Casona de Tamaya se abren las puertas a uno de los tesoros etnográficos más singulares de Europa. La Arquitectura Negra debe su nombre al uso masivo de la pizarra en muros y cubiertas, mimetizando las aldeas con el paisaje oscuro y abrupto de la sierra.",
-      "La ruta serpentea hacia el norte. Campillo de Ranas, con su atmósfera casi mística; Majaelrayo, a los pies del pico Ocejón; y Valverde de los Arroyos, uno de los pueblos más bonitos de España, donde la pizarra se combina con cuarcita dorada. En 2026, estos pueblos mantienen intacta su esencia, ofreciendo un silencio y una estética que parecen detener el tiempo."
+      "Si nos pides una sola recomendación, es esta: camina hasta la Ermita de los Enebrales al caer la tarde. Es el lugar donde el silencio de la sierra se hace más profundo y la luz del atardecer tiñe la piedra de un naranja irreal.",
+      "Es un paseo llano y sencillo de apenas 15 minutos desde el hotel, ideal para despejar la mente antes de la cena y disfrutar de una de las mejores panorámicas de la zona bajo la sombra de sabinas milenarias."
     ],
     details: [
-      { label: 'Ruta Recomendada', value: 'Tamajón -> Campillo -> Majaelrayo' },
-      { label: 'En coche', value: 'Recorrido panorámico de 40 min' }
+      { label: 'Experiencia', value: 'Mágica y Tranquila' },
+      { label: 'Momento', value: 'Puesta de sol' },
+      { label: 'Recomendado', value: 'Por Ángel y Yoli' }
+    ]
+  },
+  {
+    id: 'arquitectura-negra',
+    title: 'Ruta de la Arquitectura Negra',
+    subtitle: 'El alma de pizarra de Guadalajara',
+    image: '/images/pueblo_negro.webp',
+    category: 'culture',
+    isRecommended: true,
+    duration: 'Día completo',
+    content: [
+      "Un recorrido por los pueblos de pizarra que parecen fundirse con la montaña. Campillo de Ranas, Majaelrayo y Valverde de los Arroyos son paradas obligatorias para entender la vida en la sierra.",
+      "La ruta desde Tamajón ofrece paisajes cambiantes, desde los robledales hasta los picos de pizarra. Es un viaje al pasado a través de construcciones únicas en España, donde cada piedra cuenta una historia de resistencia y adaptación."
+    ],
+    details: [
+      { label: 'Ruta Especial', value: 'Tamajón -> Campillo -> Valverde' },
+      { label: 'En coche', value: '45 min de trayecto' },
+      { label: 'Consejo', value: 'Llevar cámara y calzado cómodo' }
+    ]
+  },
+  {
+    id: 'cascada-aljibe',
+    title: 'Aventura Natural',
+    subtitle: 'Pozas del Aljibe',
+    image: '/images/paisaje_nevado.webp',
+    category: 'adventure',
+    duration: '3-4 horas',
+    content: [
+      "Para los que buscan algo más de acción, la ruta a las Pozas del Aljibe es espectacular. Se trata de una doble cascada de agua cristalina que forma dos grandes charcas naturales en un entorno salvaje.",
+      "Es una ruta de senderismo de dificultad media que recompensa con uno de los saltos de agua más bellos de la provincia de Guadalajara. Perfecta para amantes de la fotografía de naturaleza y el aire puro."
+    ],
+    details: [
+      { label: 'Tipo', value: 'Senderismo / Naturaleza' },
+      { label: 'Distancia', value: '8km ida y vuelta' },
+      { label: 'Agua', value: 'Cristalina y Helada' }
     ]
   },
   {
     id: 'micologia',
     title: 'Paraíso Micológico',
-    subtitle: 'Temporada 2025-2026',
-    image: '/images/setas_entorno.webp', // Foto local de setas para la sección micológica
+    subtitle: 'Níscalos y Boletus',
+    image: '/images/setas_entorno.webp',
+    category: 'nature',
+    duration: 'Toda la mañana',
     content: [
-      "Cuando las lluvias de otoño bañan la Sierra Norte, Tamajón se transforma. Nuestro suelo es uno de los más ricos de Castilla-La Mancha para la micología. Somos puerta de entrada a parques micológicos regulados donde el buscador respetuoso puede encontrar auténticos tesoros.",
-      "Níscalos (Lactarius deliciosus) bajo los pinares y el preciado Boletus edulis en los robledales son los protagonistas de nuestras cestas. Para la temporada 2025-2026, recordamos la importancia de obtener el permiso diario (disponible online o en el pueblo) y de usar siempre cesta de mimbre para permitir que las esporas sigan sembrando el futuro de nuestros bosques."
+      "Tamajón es la puerta de entrada a uno de los parques micológicos más ricos de Castilla-La Mancha. Níscalos en los pinares y Boletus en los robledales son el tesoro que muchos buscan en otoño.",
+      "Recordamos siempre la importancia de recolectar con respeto, usando cesta de mimbre para soltar esporas y obteniendo el permiso necesario en el pueblo."
     ],
     details: [
-      { label: 'Temporada Alta', value: 'Octubre - Noviembre' },
-      { label: 'Permiso', value: 'Obligatorio en zonas acotadas' },
+      { label: 'Temporada', value: 'Octubre - Noviembre' },
       { label: 'Variedades', value: 'Níscalos, Boletus, Setas de Cardo' }
-    ]
-  },
-  {
-    id: 'naturaleza-hayedos',
-    title: 'Hayedos y Cumbres',
-    subtitle: 'El Ocejón y Tejera Negra',
-    image: '/images/hayedos_cumbres.webp',
-    content: [
-      "Para los amantes del senderismo, el Pico Ocejón (2.048m) es el vigía constante de nuestra comarca. Su ascensión es un clásico que recompensa con vistas inigualables de toda la provincia.",
-      "A poca distancia, la naturaleza estalla en color, especialmente en otoño. El Hayedo de Tejera Negra, Patrimonio de la Humanidad, ofrece una experiencia cromática inolvidable, aunque requiere reserva previa en temporada alta. Como alternativa más tranquila y cercana, el Hayedo de la Pedrosa en Riofrío de Riaza ofrece un espectáculo similar, íntimo y sobrecogedor."
-    ],
-    details: [
-      { label: 'Pico Ocejón', value: 'Dificultad Media-Alta' },
-      { label: 'Hayedo Tejera Negra', value: 'Reserva previa necesaria' }
     ]
   }
 ];
@@ -292,7 +320,7 @@ export const REVIEWS = [
     author: "Rocio",
     date: "Enero 2025",
     score: 9.0,
-    text: "La cercanía y atención de Rossana y Adrián de 10. Quizás el colchón, pero en general todo bien."
+    text: "La cercanía y atención de Ángel y Yoli de 10. Se nota que Ángel es del pueblo de toda la vida. Fantástico."
   },
   {
     author: "Juan",
